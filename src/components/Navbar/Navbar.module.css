@@ -1,0 +1,18 @@
+.nav {
+  grid-area: n;
+  background-color: blue;
+}
+
+.item {
+  color: red;
+}
+
+.item.active {
+  color: gold;
+}
+
+.item a {
+  color: inherit;
+  text-decoration: none;
+}
+
