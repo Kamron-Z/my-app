@@ -1,0 +1,38 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  color: #fff;
+  font-size: 20px;
+}
+
+.dialogsItems {
+  padding: 10px;
+}
+
+.dialog {
+  color: #000;
+  text-decoration: none;
+}
+
+.dialog .active {
+  color: red;
+  text-decoration: none;
+}
+
+.dialog:hover {
+  color: red;
+}
+
+.dialog a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.messages {
+  padding: 10px;
+  color: #000000;
+}
+
+.message {
+
+}

@@ -1,0 +1,20 @@
+.ProfileBackImg img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.descriptionBlock {
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  padding: 10px;
+}
+
+.authorImg {
+  width: 80px;
+  height: 80px;
+}
+
+.authorImg img {
+  width: 100%;
+  height: 100%;
+}
