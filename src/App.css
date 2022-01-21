@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .app-wrapper {
   display: grid;
   grid-template-areas:
@@ -7,7 +11,8 @@
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
 
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 

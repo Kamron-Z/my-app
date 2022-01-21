@@ -5,14 +5,17 @@ const ProfileInfo = () => {
         <div>
             <div className={s.ProfileBackImg}>
                 <img
-                    src='http://www.japan.com/wp-content/uploads/japan_home_featured_01.jpg'/>
+                    src='https://i.ytimg.com/vi/18HkHeuy5ao/maxresdefault.jpg'/>
             </div>
             <div className={s.descriptionBlock}>
                 <div className={s.authorImg}>
-                    <img src="http://pm1.narvii.com/6889/74979d4d2744ec6e27995b6e866f091d04c0b40cr1-515-414v2_uhq.jpg" />
+                    <img src="https://data.whicdn.com/images/356042526/original.jpg" />
                 </div>
                 <div>
-                    description
+                    <div>name: Amber</div>
+                    <div>sex: Female</div>
+                    <div>birthday: August 10th</div>
+                    <div>region: Mondstadt</div>
                 </div>
             </div>
         </div>

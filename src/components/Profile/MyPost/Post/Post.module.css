@@ -1,5 +1,9 @@
 .item {
-    color: gold;
+    display: grid;
+    grid-template-columns: 0.7fr 3fr 8fr;
+    color: blue;
+    align-items: center;
+    margin: 10px 0;
 }
 
 .item img {
