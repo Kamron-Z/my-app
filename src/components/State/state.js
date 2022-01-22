@@ -1,3 +1,7 @@
+let renderApp = () => {
+    console.log('state changed')
+}
+
 let state = {
     profilePage: {
         postsData: [
@@ -17,6 +21,7 @@ let state = {
                 likeCounter: 5
             }
         ],
+        newPostState: ''
     },
     dialogsPage: {
         dialogsData: [
@@ -57,7 +62,44 @@ let state = {
             },
 
         ],
+        newDialogState: ' ok'
     }
+}
+
+export let updatePostState = (update) => {
+    state.profilePage.newPostState = update
+    renderApp(state)
+}
+
+export let addPost = () => {
+    let text = {
+        id: 4,
+        message: state.profilePage.newPostState,
+        likeCounter: 0
+    }
+    state.profilePage.postsData.push(text)
+    state.profilePage.newPostState = ''
+    renderApp(state)
+}
+
+export let updateDialogState = (element) => {
+    state.dialogsPage.newDialogState = element
+    renderApp(state)
+}
+
+export let addDialog = () => {
+    let text = {
+        id: 4,
+        message: state.dialogsPage.newDialogState
+    }
+    state.dialogsPage.messageData.push(text)
+    state.dialogsPage.newDialogState = ''
+    renderApp(state)
+}
+
+// subscribe < app = state >
+export let subscribe = (observer) => {
+    renderApp = observer
 }
 
 export default state
