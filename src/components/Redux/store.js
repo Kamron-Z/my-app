@@ -1,4 +1,6 @@
-let state = {
+import {rerender} from "../../render";
+
+let store = {
     profilePage: {
         postsData: [
             {
@@ -17,6 +19,7 @@ let state = {
                 likeCounter: 5
             }
         ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogsData: [
@@ -60,4 +63,21 @@ let state = {
     }
 }
 
-export default state
+export let addPostStore = (newMessage) => {
+    let text = {
+        id: 4,
+        message: store.profilePage.newPostText,
+        likeCounter: 0
+    }
+    store.profilePage.postsData.push(text)
+    store.profilePage.newPostText = ''
+    rerender(store)
+}
+
+export let updatePostState = (newPostText) => {
+    store.profilePage.newPostText = newPostText
+    rerender(store)
+}
+
+export default store
+window.store = store
