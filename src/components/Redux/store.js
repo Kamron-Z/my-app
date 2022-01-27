@@ -1,4 +1,6 @@
-import {rerender} from "../../render";
+let rerender = () => {
+    console.log('store changed')
+}
 
 let store = {
     profilePage: {
@@ -63,7 +65,7 @@ let store = {
     }
 }
 
-export let addPostStore = (newMessage) => {
+export let addPostStore = () => {
     let text = {
         id: 4,
         message: store.profilePage.newPostText,
@@ -77,6 +79,10 @@ export let addPostStore = (newMessage) => {
 export let updatePostState = (newPostText) => {
     store.profilePage.newPostText = newPostText
     rerender(store)
+}
+
+export const subscribe = (observer) => {
+    rerender = observer
 }
 
 export default store
