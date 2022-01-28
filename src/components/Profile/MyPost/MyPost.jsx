@@ -7,11 +7,11 @@ const MyPost = (props) => {
 
     const updatePost = (event) => {
         let text = event.target.value
-        props.updatePostState(text)
+        props.dispatch({type: 'UPDATE-POST-STATE', newPostText: text})
     }
 
-    let addPosts = () => {
-        props.addPostStore()
+    const addPosts = () => {
+        props.dispatch({type: 'ADD-POST'})
     }
 
     return (

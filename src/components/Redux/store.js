@@ -1,6 +1,6 @@
 
 let store = {
-    _rerender() {
+    _callSubscriber() {
         console.log('store changed')
     },
     _state: {
@@ -65,27 +65,31 @@ let store = {
             ],
         }
     },
+
     subscribe (observer) {
-        this._rerender = observer
+        this._callSubscriber = observer
     },
     getState(){
         return this._state
     },
-    addPostStore  ()  {
-        let text = {
-            id: 4,
-            message: this._state.profilePage.newPostText,
-            likeCounter: 0
+
+    dispatch(action){
+        if(action.type === 'ADD-POST') {
+            let text = {
+                id: 4,
+                message: this._state.profilePage.newPostText,
+                likeCounter: 0
+            }
+            this._state.profilePage.postsData.push(text)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-POST-STATE') {
+            this._state.profilePage.newPostText = action.newPostText
+            this._callSubscriber(this._state)
         }
-        this._state.profilePage.postsData.push(text)
-        this._state.profilePage.newPostText = ''
-        this._rerender(this._state)
-    },
-    updatePostState (newPostText) {
-        this._state.profilePage.newPostText = newPostText
-        this._rerender(this._state)
     }
 }
 
 export default store
+
 window.store = store
