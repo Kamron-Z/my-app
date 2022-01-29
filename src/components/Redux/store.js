@@ -1,7 +1,7 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST_STATE = 'UPDATE-POST-STATE';
-const ADD_DIALOGS = 'ADD-DIALOGS';
-const UPDATE_DIALOGS_STATE = 'UPDATE-DIALOGS-STATE';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
+
 
 let store = {
     _callSubscriber() {
@@ -68,7 +68,8 @@ let store = {
 
             ],
             newDialogsText: ''
-        }
+        },
+        sidebar: {}
     },
 
     subscribe(observer) {
@@ -79,58 +80,11 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let text = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                likeCounter: 0
-            }
-            this._state.profilePage.postsData.push(text)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_POST_STATE) {
-            this._state.profilePage.newPostText = action.newPostText
-            this._callSubscriber(this._state)
-        } else {
-            if (action.type === UPDATE_DIALOGS_STATE) {
-                this._state.dialogsPage.newDialogsText = action.newPostText
-                this._callSubscriber(this._state)
-            } else {
-                if (action.type === ADD_DIALOGS) {
-                    let text = {
-                        id: 5,
-                        message: this._state.dialogsPage.newDialogsText
-                    }
-                    this._state.dialogsPage.messageData.push(text)
-                    this._state.dialogsPage.newDialogsText = ''
-                    this._callSubscriber(this._state)
-                }
-            }
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber(this._state)
     }
-}
-
-export const addPostCreator = () => {
-    return {
-        type: ADD_POST
-    }
-}
-export const updatePostStateCreator = (text) => {
-    return {
-        type: UPDATE_POST_STATE,
-        newPostText: text
-    }
-}
-export const addDialogsCreator = () => {
-    return {
-        type: ADD_DIALOGS,
-    }
-}
-export const updateDialogsCreator = (text) => {
-    return {
-        type: UPDATE_DIALOGS_STATE,
-        newPostText: text
-    };
 }
 
 export default store

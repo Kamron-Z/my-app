@@ -1,8 +1,6 @@
 import s from './MyPost.module.css'
 import Post from "./Post/Post";
-import {addPostCreator, updatePostState, updatePostStateCreator} from "../../Redux/store";
-
-
+import {addPostCreator, updatePostStateCreator} from "../../Redux/profileReducer";
 
 const MyPost = (props) => {
     let postElements = props.postsData.map((p) => <Post message={p.message} liked={p.likeCounter}/>)

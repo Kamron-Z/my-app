@@ -2,7 +2,7 @@ import s from './Dialogs.module.css'
 import {NavLink, Route, Routes} from "react-router-dom";
 import DialogsItem from "./DialogsItem/dialogsItem";
 import Message from "./Message/Message";
-import {addDialogsCreator, updateDialogsCreator} from "../Redux/store";
+import {addDialogsCreator, updateDialogsCreator} from "../Redux/dialogsReducer";
 
 const Dialogs = (props) => {
     let dialogElements = props.state.dialogsData.map((d) => <DialogsItem name={d.name} id={d.id}/>)
