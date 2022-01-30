@@ -4,8 +4,8 @@ import DialogsItem from "./DialogsItem/dialogsItem";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-    let dialogElements = props.dialogsData.map((d) => <DialogsItem name={d.name} id={d.id}/>)
-    let messageElements = props.messageData.map((m) => <Message message={m.message}/>)
+    let dialogElements = props.dialogsData.map((d) => <DialogsItem name={d.name} key={d.id}/>)
+    let messageElements = props.messageData.map((m) => <Message message={m.message} key={m.id}/>)
 
     const updateDialogs = (event) => {
         let text = event.target.value
@@ -28,7 +28,6 @@ const Dialogs = (props) => {
                     <button onClick={sendDialogs}>send</button>
                 </div>
             </div>
-
         </div>
     )
 }
