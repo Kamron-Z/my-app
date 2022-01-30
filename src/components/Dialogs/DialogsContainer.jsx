@@ -1,23 +1,25 @@
-import s from './Dialogs.module.css'
-import {NavLink, Route, Routes} from "react-router-dom";
-import DialogsItem from "./DialogsItem/dialogsItem";
-import Message from "./Message/Message";
 import {addDialogsCreator, updateDialogsCreator} from "../Redux/dialogsReducer";
 import Dialogs from "./Dialogs";
+import {connect} from "react-redux";
 
-const DialogsContainer = (props) => {
-    let state = props.store.getState();
-    const updateDialogs = (text) => {
-        props.store.dispatch(updateDialogsCreator(text))
+let mapStateToProps = (state) => {
+    return {
+        dialogsData: state.dialogsPage.dialogsData,
+        messageData: state.dialogsPage.messageData,
+        newDialogsText: state.dialogsPage.newDialogsText
     }
-
-    const sendDialogs = () => {
-        props.store.dispatch(addDialogsCreator())
-    }
-
-    return (
-       <Dialogs updateNewDialogs={updateDialogs} addDialogs={sendDialogs} state={state.dialogsPage}/>
-    )
 }
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateNewDialogs: (text) => {
+            dispatch(updateDialogsCreator(text))
+        },
+        addDialogs: () => {
+            dispatch(addDialogsCreator())
+        }
+    }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer
