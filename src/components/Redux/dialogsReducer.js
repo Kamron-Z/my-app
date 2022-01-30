@@ -1,7 +1,49 @@
 const ADD_DIALOGS = 'ADD-DIALOGS';
 const UPDATE_DIALOGS_STATE = 'UPDATE-DIALOGS-STATE';
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+    dialogsData: [
+        {
+            id: 1,
+            name: 'Damir'
+        },
+        {
+            id: 2,
+            name: 'Axmad'
+        },
+        {
+            id: 3,
+            name: 'Fedya'
+        }, {
+            id: 4,
+            name: 'Sunnat'
+        }, {
+            id: 5,
+            name: 'Komron'
+        }
+    ],
+    messageData: [
+        {
+            id: 1,
+            message: 'hi'
+        },
+        {
+            id: 2,
+            message: 'How are you'
+        },
+        {
+            id: 3,
+            message: 'okay'
+        }, {
+            id: 4,
+            message: 'hi'
+        },
+
+    ],
+    newDialogsText: ''
+}
+
+const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_DIALOGS:

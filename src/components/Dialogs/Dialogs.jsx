@@ -2,7 +2,6 @@ import s from './Dialogs.module.css'
 import {NavLink, Route, Routes} from "react-router-dom";
 import DialogsItem from "./DialogsItem/dialogsItem";
 import Message from "./Message/Message";
-import {addDialogsCreator, updateDialogsCreator} from "../Redux/dialogsReducer";
 
 const Dialogs = (props) => {
     let dialogElements = props.state.dialogsData.map((d) => <DialogsItem name={d.name} id={d.id}/>)
@@ -10,11 +9,11 @@ const Dialogs = (props) => {
 
     const updateDialogs = (event) => {
         let text = event.target.value
-        props.dispatch(updateDialogsCreator(text))
+        props.updateNewDialogs(text)
     }
 
     const sendDialogs = () => {
-        props.dispatch(addDialogsCreator())
+        props.addDialogs()
     }
 
     return (
