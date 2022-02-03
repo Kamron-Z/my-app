@@ -1,32 +1,14 @@
 let FOLLOW = 'FOLLOW'
 let UNFOLLOW = 'UNFOLLOW'
 let SET_USERS = 'SET_USERS'
+let SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+let SET_TOTAL_COUNTER = 'SET_TOTAL_COUNTER'
 
 let initialState = {
-    users: [{
-        id: 1,
-        followed: false,
-        fullName: 'Damir',
-        status: 'I am good',
-        location: {county: 'Uzbekiston', region: 'Samarkand'},
-        photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEg7e95w0mQFIleibc4zyRrWNobQ4aFIuaQ&usqp=CAU',
-    },
-        {
-            id: 2,
-            followed: true,
-            fullName: 'Axmad',
-            status: 'I am good too',
-            location: {county: 'Uzbekiston', region: 'Toshkent'},
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEg7e95w0mQFIleibc4zyRrWNobQ4aFIuaQ&usqp=CAU',
-        },
-        {
-            id: 3,
-            followed: true,
-            fullName: 'Sunnat',
-            status: 'I am super',
-            location: {county: 'Uzbekiston', region: 'Samarkand'},
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLEg7e95w0mQFIleibc4zyRrWNobQ4aFIuaQ&usqp=CAU',
-        }]
+    users: [],
+    pageSize: 10,
+    totalUsersCounter: 0,
+    currentPage: 1
 }
 
 const userReducer = (state = initialState, action) => {
@@ -55,7 +37,17 @@ const userReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_COUNTER:
+            return {
+                ...state,
+                totalUsersCounter: action.totalCount
             }
         default:
             return state
@@ -67,5 +59,9 @@ export let followCreator = (userId) => ({type: FOLLOW, userId})
 export let unFollowCreator = (userId) => ({type: UNFOLLOW, userId})
 
 export let setUsersCreator = (users) => ({type: SET_USERS, users})
+
+export let setCurrentPageCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+
+export let setTotalCountCreator = (totalCount)=> ({ type: SET_TOTAL_COUNTER , totalCount })
 
 export default userReducer
