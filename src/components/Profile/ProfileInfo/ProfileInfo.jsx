@@ -1,6 +1,11 @@
 import s from './ProfileInfo.module.css'
+import Preloader from "../../common/Preloader/Preloader";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if(!props.profile) {
+        return <Preloader />
+    }
+
     return (
         <div>
             <div className={s.ProfileBackImg}>
@@ -9,13 +14,13 @@ const ProfileInfo = () => {
             </div>
             <div className={s.descriptionBlock}>
                 <div className={s.authorImg}>
-                    <img src="https://data.whicdn.com/images/356042526/original.jpg" />
+                    <img src={props.profile.photos.large} />
                 </div>
                 <div>
-                    <div>name: Amber</div>
-                    <div>sex: Female</div>
-                    <div>birthday: August 10th</div>
-                    <div>region: Mondstadt</div>
+                    <div>name: {props.profile.fullName}</div>
+                    <div>about me: {props.profile.aboutMe}</div>
+                    <div>Job about:{props.profile.lookingForAJobDescription}</div>
+                    <div>Job status: {props.profile.lookingForAJob ? 'working' : 'not work'}</div>
                 </div>
             </div>
         </div>
