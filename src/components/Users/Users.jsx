@@ -16,7 +16,8 @@ const Users = (props) => {
     return (
         <div>
             {pages.map((p) => {
-                return <button disabled={props.currentPage == p ? 'disabled': null}  key={p} className={props.currentPage === p ? s.pageSelect : ''}
+                return <button disabled={props.currentPage == p ? 'disabled' : null} key={p}
+                               className={props.currentPage === p ? s.pageSelect : ''}
                                onClick={() => {
                                    props.onPageChange(p)
                                }}>{p}</button>
@@ -33,8 +34,34 @@ const Users = (props) => {
                             </div>
                             <div>
                                 {u.followed ?
-                                    <button onClick={() => props.unFollow(u.id)}>unfollow</button>
-                                    : <button onClick={() => props.follow(u.id)}>follow</button>}
+                                    <button onClick={() => {
+
+                                        axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + u.id, {
+                                            withCredentials: true, headers: {
+                                                "API-KEY": "93dd530c-fc6d-4e26-bfa6-16b1f7bc6644"
+                                            }
+                                        })
+                                            .then(res => {
+                                                if (res.data.resultCode == 0) {
+                                                    props.unFollow(u.id)
+                                                }
+                                            })
+
+                                    }}>unfollow</button>
+                                    : <button onClick={() => {
+
+                                        axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + u.id, {}, {
+                                            withCredentials: true, headers:
+                                                {"API-KEY": "93dd530c-fc6d-4e26-bfa6-16b1f7bc6644"}
+                                        })
+                                            .then(res => {
+                                                if (res.data.resultCode == 0) {
+                                                    props.follow(u.id)
+                                                }
+                                            })
+
+                                    }
+                                    }>follow</button>}
                             </div>
                         </div>
                         <div>

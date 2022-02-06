@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component {
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
             .then(res => {
-                if(res.data.resultCode === 0) {
+                if (res.data.resultCode === 0) {
                     let {id, email, login} = res.data.data
                     this.props.setAuthCreator({id, email, login})
                 }
@@ -28,4 +28,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default  connect(mapStateToProps, {setAuthCreator})(HeaderContainer)
+export default connect(mapStateToProps, {setAuthCreator})(HeaderContainer)

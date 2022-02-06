@@ -33,7 +33,8 @@ class ProfileAPI  extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        profile: state.profilePage
+        profile: state.profilePage,
+        authId: state.auth.id
     }
 }
 
