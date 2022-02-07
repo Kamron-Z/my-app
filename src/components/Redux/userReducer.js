@@ -4,13 +4,15 @@ let SET_USERS = 'SET_USERS'
 let SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 let SET_TOTAL_COUNTER = 'SET_TOTAL_COUNTER'
 let SET_IS_FETCHING = 'SET_IS_FETCHING'
+let SET_FOLLOW_PROGRESS = 'SET_FOLLOW_PROGRESS'
 
 let initialState = {
     users: [],
     pageSize: 10,
     totalUsersCounter: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followIsProgress: []
 }
 
 const userReducer = (state = initialState, action) => {
@@ -55,6 +57,13 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state, isFetching: action.isFetching
             }
+
+        case SET_FOLLOW_PROGRESS: {
+            return {
+                ...state,
+                followIsProgress: action.isFetching ? [state.followIsProgress, action.userId] : state.followIsProgress.filter(id => id !== action.userId)
+            }
+        }
         default:
             return state
     }
@@ -71,5 +80,7 @@ export let setCurrentPageCreator = (currentPage) => ({type: SET_CURRENT_PAGE, cu
 export let setTotalCountCreator = (totalCount) => ({type: SET_TOTAL_COUNTER, totalCount})
 
 export let setIsFetchingCreator = (isFetching) => ({type: SET_IS_FETCHING, isFetching})
+
+export let setFollowCreator = (isFetching, userId) => ({type: SET_FOLLOW_PROGRESS, isFetching, userId})
 
 export default userReducer

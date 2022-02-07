@@ -17,7 +17,7 @@ const Users = (props) => {
     return (
         <div>
             {pages.map((p) => {
-                return <button disabled={props.currentPage == p ? 'disabled' : null} key={p}
+                return <button disabled={props.currentPage === p} key={p}
                                className={props.currentPage === p ? s.pageSelect : ''}
                                onClick={() => {
                                    props.onPageChange(p)
@@ -35,19 +35,23 @@ const Users = (props) => {
                             </div>
                             <div>
                                 {u.followed ?
-                                    <button onClick={() => {
+                                    <button disabled={props.followIsProgress.some(id => id === u.id)}  onClick={() => {
+                                        props.setFollowCreator(true, u.id)
                                         delFollow(u.id).then(res => {
                                             if (res.data.resultCode === 0) {
                                                 props.unFollow(u.id)
                                             }
+                                            props.setFollowCreator(false, u.id)
                                         })
 
                                     }}>unfollow</button>
-                                    : <button onClick={() => {
+                                    : <button disabled={props.followIsProgress.some(id => id === u.id)} onClick={() => {
+                                        props.setFollowCreator(true, u.id)
                                         postFollow(u.id).then(res => {
                                             if (res.data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.setFollowCreator(false, u.id)
                                         })
                                     }
                                     }>follow</button>}

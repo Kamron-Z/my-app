@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {
     followCreator,
-    setCurrentPageCreator, setIsFetchingCreator,
+    setCurrentPageCreator, setFollowCreator, setIsFetchingCreator,
     setTotalCountCreator,
     setUsersCreator,
     unFollowCreator
@@ -42,6 +42,8 @@ class UsersAPI extends React.Component {
                 onPageChange={this.onPageChange}
                 unFollow={this.props.unFollow}
                 follow={this.props.follow}
+                setFollowCreator={this.props.setFollowCreator}
+                followIsProgress={this.props.followIsProgress}
             />}
         </>
     }
@@ -53,7 +55,8 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCounter: state.usersPage.totalUsersCounter,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followIsProgress: state.usersPage.followIsProgress
     }
 }
 
@@ -88,6 +91,7 @@ let UsersContainer = connect(mapStateToProps,
         setCurrentPage: setCurrentPageCreator,
         setTotalPage: setTotalCountCreator,
         setIsFetching: setIsFetchingCreator,
+        setFollowCreator: setFollowCreator
     }
 )(UsersAPI)
 
