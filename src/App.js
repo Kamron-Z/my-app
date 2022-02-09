@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
@@ -8,6 +8,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UserContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/Login";
 
 const App = (props) => {
     return (
@@ -25,6 +26,7 @@ const App = (props) => {
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/users' element={<UsersContainer/>}/>
+                        <Route path='/login' element={<LoginPage/>}/>
                     </Routes>
                 </div>
             </div>

@@ -1,3 +1,5 @@
+import {authAPI} from "../../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_STATE = 'UPDATE-POST-STATE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -67,11 +69,18 @@ export const updatePostStateCreator = (text) => {
     }
 }
 
-export const setUsersProfileCreator = (user) => {
+export const setUsersProfile = (user) => {
     return {
         type: SET_USER_PROFILE,
         user
     }
+}
+
+export const getProfile = (userId) => (dispatch)=> {
+    authAPI.me(userId)
+        .then(res => {
+            dispatch(setUsersProfile(res.data))
+        })
 }
 
 export default profileReducer

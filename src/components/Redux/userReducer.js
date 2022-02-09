@@ -1,3 +1,5 @@
+import {usersAPI} from "../../api/api";
+
 let FOLLOW = 'FOLLOW'
 let UNFOLLOW = 'UNFOLLOW'
 let SET_USERS = 'SET_USERS'
@@ -73,14 +75,49 @@ export let followCreator = (userId) => ({type: FOLLOW, userId})
 
 export let unFollowCreator = (userId) => ({type: UNFOLLOW, userId})
 
-export let setUsersCreator = (users) => ({type: SET_USERS, users})
+export let setUsers = (users) => ({type: SET_USERS, users})
 
 export let setCurrentPageCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
 
-export let setTotalCountCreator = (totalCount) => ({type: SET_TOTAL_COUNTER, totalCount})
+export let setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNTER, totalCount})
 
-export let setIsFetchingCreator = (isFetching) => ({type: SET_IS_FETCHING, isFetching})
+export let setIsFetching = (isFetching) => ({type: SET_IS_FETCHING, isFetching})
 
 export let setFollowCreator = (isFetching, userId) => ({type: SET_FOLLOW_PROGRESS, isFetching, userId})
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setIsFetching(true))
+        usersAPI.getUsersApi(currentPage, pageSize).then(data => {
+            dispatch(setIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalCount(data.totalCount))
+        })
+    }
+}
+
+export const unfollow = (userId)=> {
+    return (dispatch) => {
+       dispatch(setFollowCreator(true, userId))
+        usersAPI.delFollow(userId).then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(unFollowCreator(userId))
+            }
+            dispatch(setFollowCreator(false, userId))
+        })
+    }
+}
+
+export const follow  = (userId) => {
+  return (dispatch) => {
+      dispatch(setFollowCreator(true, userId))
+      usersAPI.postFollow(userId).then(res => {
+          if (res.data.resultCode === 0) {
+              dispatch(followCreator(userId))
+          }
+          dispatch(setFollowCreator(false, userId))
+      })
+  }
+}
 
 export default userReducer
