@@ -1,18 +1,11 @@
 import s from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
-import {Route, Routes} from "react-router-dom";
-import LoginPage from "../Login/Login";
 import React from "react";
+import {AuthRedirectComponents} from "../hoc/withAuthRedirect";
 
 const Profile = (props) => {
-    if (!props.isAuth) {
-        return (
-            <Routes>
-                <Route path="/" element={<LoginPage />} />
-            </Routes>
-        );
-    }
+
     return (
         <div>
             <ProfileInfo profile={props.profile.profileUser}/>
@@ -21,4 +14,6 @@ const Profile = (props) => {
     )
 }
 
-export default Profile
+let AuthRedirectProfile = AuthRedirectComponents(Profile)
+
+export default AuthRedirectProfile

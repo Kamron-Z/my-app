@@ -1,8 +1,8 @@
 import React from "react";
-import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfile} from "../Redux/profileReducer";
 import {useParams} from "react-router-dom";
+import AuthRedirectProfile from "./Profile";
 
 let params = 0
 let Params = () => {
@@ -23,7 +23,7 @@ class ProfileAPI extends React.Component {
         return (
             <>
                 <Params/>
-                <Profile profile={this.props.profile} isAuth={this.props.isAuth}/>
+                <AuthRedirectProfile profile={this.props.profile} isAuth={this.props.isAuth}/>
             </>
         )
     }
@@ -33,9 +33,10 @@ let mapStateToProps = (state) => {
     return {
         profile: state.profilePage,
         authId: state.auth.id,
-        isAuth: state.auth.isAuth
     }
 }
+
+
 
 export default connect(mapStateToProps,
     {
