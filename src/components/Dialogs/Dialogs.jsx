@@ -4,7 +4,6 @@ import Message from "./Message/Message";
 import {Route, Routes} from "react-router-dom";
 import LoginPage from "../Login/Login";
 import React from "react";
-import {AuthRedirectComponents} from "../hoc/withAuthRedirect";
 
 const Dialogs = (props) => {
     let dialogElements = props.dialogsData.map((d) => <DialogsItem name={d.name} id={d.id} key={d.id}/>)
@@ -17,14 +16,6 @@ const Dialogs = (props) => {
 
     const sendDialogs = () => {
         props.addDialogs()
-    }
-
-    if (!props.isAuth) {
-        return (
-            <Routes>
-                <Route path="/" element={<LoginPage />} />
-            </Routes>
-        );
     }
 
     return (
@@ -43,6 +34,4 @@ const Dialogs = (props) => {
     )
 }
 
-let AuthRedirectDialogs = AuthRedirectComponents(Dialogs)
-
-export default AuthRedirectDialogs
+export default Dialogs
